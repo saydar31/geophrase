@@ -25,7 +25,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        Optional<User> userOptional = jwtService.getFromToken(authentication.getName());
+        Optional<User> userOptional = jwtService.getFromToken(authentication.getCredentials().toString());
         if (userOptional.isPresent()){
             JwtAuthentication jwtAuthentication = (JwtAuthentication) authentication;
             jwtAuthentication.setUser(userOptional.get());
