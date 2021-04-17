@@ -35,7 +35,7 @@ public class UserController {
     @GetMapping("/currentUser")
     @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "получить информацию о текущем пользователе", response = UserDto.class)
-    @ApiImplicitParam(name = "Authorization", value = "Access Token", paramType = "header")
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", paramType = "header", required = true)
     public ResponseEntity<UserDto> currentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
