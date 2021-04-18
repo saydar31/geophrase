@@ -9,6 +9,7 @@ import ru.itis.geophrase.model.Message;
 import ru.itis.geophrase.model.User;
 import ru.itis.geophrase.repositories.TweetRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -28,6 +29,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @Transactional
     public Message replyTweet(String parentTweetId, User user, TweetDto tweetDto) {
         Message parentMessage = tweetRepository.findById(parentTweetId).orElseThrow(TweetNotFoundException::new);
         Message message = Message.builder()
@@ -35,7 +37,9 @@ public class MessageServiceImpl implements MessageService {
                 .content(tweetDto.getContent())
                 .parentMessage(parentMessage)
                 .build();
-        return tweetRepository.save(message);
+        tweetRepository.save(message);
+        parentMessage.getChildMessages().add(message);
+        return message;
     }
 
 

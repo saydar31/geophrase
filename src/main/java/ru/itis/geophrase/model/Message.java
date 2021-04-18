@@ -20,9 +20,9 @@ public class Message {
     private String id;
     @ManyToOne
     private User user;
-    @OneToOne
+    @ManyToOne
     private Message parentMessage;
-    @OneToMany
+    @OneToMany(mappedBy = "parentMessage")
     private List<Message> childMessages;
     private String content;
     private Double lat;
