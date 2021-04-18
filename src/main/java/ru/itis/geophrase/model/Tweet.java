@@ -1,9 +1,6 @@
 package ru.itis.geophrase.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import ru.itis.geophrase.generators.RandomStringIdGenerator;
 
@@ -14,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Tweet {
     @Id
     @GeneratedValue(generator = RandomStringIdGenerator.generatorName)
