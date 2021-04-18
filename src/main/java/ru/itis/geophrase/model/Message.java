@@ -23,7 +23,7 @@ public class Message {
     private User user;
     @ManyToOne
     private Message parentMessage;
-    @OneToMany(mappedBy = "parentMessage")
+    @OneToMany(mappedBy = "parentMessage", cascade = CascadeType.REMOVE)
     private List<Message> childMessages;
     private Instant createdAt;
     private Instant lastUpdatedAt;

@@ -63,4 +63,15 @@ public class MessageController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(messageDtoList);
     }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
+    @ApiOperation(value = "удалить запись", response = MessageDto.class)
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", paramType = "header", required = true)
+    public ResponseEntity<?> delete(@PathVariable("id") String id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        messageService.delete(id, user);
+        return ResponseEntity.ok().build();
+    }
 }

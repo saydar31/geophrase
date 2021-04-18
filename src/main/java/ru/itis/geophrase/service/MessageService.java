@@ -13,4 +13,6 @@ public interface MessageService {
     Message replyTweet(String id, User user, MessageDto messageDto);
 
     List<Message> getTweetsInRadius(Location location);
+
+    void delete(String id, User user);
 }

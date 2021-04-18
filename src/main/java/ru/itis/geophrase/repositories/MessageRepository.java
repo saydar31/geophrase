@@ -7,7 +7,7 @@ import ru.itis.geophrase.model.Message;
 
 import java.util.List;
 
-public interface TweetRepository extends JpaRepository<Message, String> {
+public interface MessageRepository extends JpaRepository<Message, String> {
     String HAVERSINE_FORMULA = "(6371 * acos(cos(radians(:latitude)) * cos(radians(t.lat)) *" +
             " cos(radians(t.lon) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(t.lat))))";
 
