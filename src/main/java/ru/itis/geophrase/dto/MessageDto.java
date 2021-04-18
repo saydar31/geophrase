@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TweetDto {
+public class MessageDto {
     private String id;
     private String userNickname;
     private String parentTweetId;

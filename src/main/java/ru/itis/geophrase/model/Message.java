@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import ru.itis.geophrase.generators.RandomStringIdGenerator;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,8 @@ public class Message {
     private Message parentMessage;
     @OneToMany(mappedBy = "parentMessage")
     private List<Message> childMessages;
+    private Instant createdAt;
+    private Instant lastUpdatedAt;
     private String content;
     private Double lat;
     private Double lon;
