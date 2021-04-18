@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.itis.geophrase.dto.SignInDto;
 import ru.itis.geophrase.dto.TokenDto;
 import ru.itis.geophrase.dto.UserDto;
+import ru.itis.geophrase.dto.UserSignUpDto;
 import ru.itis.geophrase.exception.NicknameExistsException;
 import ru.itis.geophrase.exception.WrongNicknameOrPasswordExcpetion;
 import ru.itis.geophrase.model.User;
@@ -23,7 +24,7 @@ public class AuthServiceImpl implements AuthService {
     private JwtService jwtService;
 
     @Override
-    public User signUp(UserDto userDto) {
+    public User signUp(UserSignUpDto userDto) {
         if (userRepository.existsByNickname(userDto.getNickname())) {
             throw new NicknameExistsException();
         }

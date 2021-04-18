@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.itis.geophrase.dto.SignInDto;
 import ru.itis.geophrase.dto.TokenDto;
 import ru.itis.geophrase.dto.UserDto;
+import ru.itis.geophrase.dto.UserSignUpDto;
 import ru.itis.geophrase.model.User;
 import ru.itis.geophrase.service.AuthService;
 
@@ -32,7 +33,7 @@ public class AuthController {
             @ApiResponse(code = 200, message = "Регистрация успешна"),
             @ApiResponse(code = 400, message = "Ник уже занят"),
     })
-    public ResponseEntity<?> signUp(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> signUp(@RequestBody UserSignUpDto userDto) {
         User user = authService.signUp(userDto);
         return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }

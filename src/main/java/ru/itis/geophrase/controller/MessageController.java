@@ -42,7 +42,7 @@ public class MessageController {
         return ResponseEntity.ok(resultDto);
     }
 
-    @PostMapping("/{parentMessageId}/reply")
+    @PostMapping("/{parentMessageId}/replyInThread")
     @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "ответить на сообщение", response = MessageDto.class)
     @ApiImplicitParam(name = "Authorization", value = "Access Token", paramType = "header", required = true)
