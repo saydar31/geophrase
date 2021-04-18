@@ -14,18 +14,18 @@ import ru.itis.geophrase.dto.Location;
 import ru.itis.geophrase.dto.TweetDto;
 import ru.itis.geophrase.model.Message;
 import ru.itis.geophrase.model.User;
-import ru.itis.geophrase.service.TweetService;
+import ru.itis.geophrase.service.MessageService;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/tweet")
-@Api(value = "Твиты")
-public class TweetController {
+@RequestMapping("/api/v1/message")
+@Api(value = "Сообщения")
+public class MessageController {
     @Autowired
-    private TweetService tweetService;
+    private MessageService messageService;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -36,7 +36,7 @@ public class TweetController {
     public ResponseEntity<?> postTweet(@RequestBody @Valid TweetDto tweetDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-        Message message = tweetService.postTweet(user, tweetDto);
+        Message message = messageService.postTweet(user, tweetDto);
         TweetDto resultDto = modelMapper.map(message, TweetDto.class);
         return ResponseEntity.ok(resultDto);
     }
@@ -48,7 +48,7 @@ public class TweetController {
     public ResponseEntity<?> replyTweet(@PathVariable("parentTweetId") String parentId, @RequestBody @Valid TweetDto tweetDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-        Message message = tweetService.replyTweet(parentId, user, tweetDto);
+        Message message = messageService.replyTweet(parentId, user, tweetDto);
         TweetDto resultDto = modelMapper.map(message, TweetDto.class);
         return ResponseEntity.ok(resultDto);
     }
@@ -56,7 +56,7 @@ public class TweetController {
     @GetMapping("/inLocation")
     @ApiOperation(value = "получить твиты в радиусе", response = TweetDto.class)
     public ResponseEntity<?> getTweetsInRadius(Location location) {
-        List<Message> messageList = tweetService.getTweetsInRadius(location);
+        List<Message> messageList = messageService.getTweetsInRadius(location);
         List<TweetDto> tweetDtoList = messageList.stream()
                 .map(tweet -> modelMapper.map(tweet, TweetDto.class))
                 .collect(Collectors.toList());

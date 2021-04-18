@@ -7,7 +7,7 @@ import ru.itis.geophrase.model.User;
 
 import java.util.List;
 
-public interface TweetService {
+public interface MessageService {
     Message postTweet(User user, TweetDto tweetDto);
 
     Message replyTweet(String id, User user, TweetDto tweetDto);

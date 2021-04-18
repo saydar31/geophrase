@@ -12,7 +12,7 @@ import ru.itis.geophrase.repositories.TweetRepository;
 import java.util.List;
 
 @Component
-public class TweetServiceImpl implements TweetService {
+public class MessageServiceImpl implements MessageService {
     @Autowired
     private TweetRepository tweetRepository;
 

@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import ru.itis.geophrase.generators.RandomStringIdGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -21,8 +22,8 @@ public class Message {
     private User user;
     @OneToOne
     private Message parentMessage;
-    @OneToOne
-    private Message childMessage;
+    @OneToMany
+    private List<Message> childMessages;
     private String content;
     private Double lat;
     private Double lon;
