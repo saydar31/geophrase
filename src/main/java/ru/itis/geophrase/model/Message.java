@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-public class Tweet {
+public class Message {
     @Id
     @GeneratedValue(generator = RandomStringIdGenerator.generatorName)
     @GenericGenerator(name = RandomStringIdGenerator.generatorName, strategy = "ru.itis.geophrase.generators.RandomStringIdGenerator")
@@ -20,7 +20,9 @@ public class Tweet {
     @ManyToOne
     private User user;
     @OneToOne
-    private Tweet parentTweet;
+    private Message parentMessage;
+    @OneToOne
+    private Message childMessage;
     private String content;
     private Double lat;
     private Double lon;

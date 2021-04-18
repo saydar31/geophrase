@@ -22,7 +22,7 @@ import ru.itis.geophrase.service.UserService;
 @Api(value = "Информация о пользователях")
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
     private ModelMapper modelMapper;
 

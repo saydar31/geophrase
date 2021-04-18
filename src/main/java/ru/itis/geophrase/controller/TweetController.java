@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.geophrase.dto.Location;
 import ru.itis.geophrase.dto.TweetDto;
-import ru.itis.geophrase.model.Tweet;
+import ru.itis.geophrase.model.Message;
 import ru.itis.geophrase.model.User;
 import ru.itis.geophrase.service.TweetService;
 
@@ -36,8 +36,8 @@ public class TweetController {
     public ResponseEntity<?> postTweet(@RequestBody @Valid TweetDto tweetDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-        Tweet tweet = tweetService.postTweet(user, tweetDto);
-        TweetDto resultDto = modelMapper.map(tweet, TweetDto.class);
+        Message message = tweetService.postTweet(user, tweetDto);
+        TweetDto resultDto = modelMapper.map(message, TweetDto.class);
         return ResponseEntity.ok(resultDto);
     }
 
@@ -48,16 +48,18 @@ public class TweetController {
     public ResponseEntity<?> replyTweet(@PathVariable("parentTweetId") String parentId, @RequestBody @Valid TweetDto tweetDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-        Tweet tweet = tweetService.replyTweet(parentId, user, tweetDto);
-        TweetDto resultDto = modelMapper.map(tweet, TweetDto.class);
+        Message message = tweetService.replyTweet(parentId, user, tweetDto);
+        TweetDto resultDto = modelMapper.map(message, TweetDto.class);
         return ResponseEntity.ok(resultDto);
     }
 
     @GetMapping("/inLocation")
     @ApiOperation(value = "получить твиты в радиусе", response = TweetDto.class)
     public ResponseEntity<?> getTweetsInRadius(Location location) {
-        List<Tweet> tweetList = tweetService.getTweetsInRadius(location);
-        List<TweetDto> tweetDtoList = tweetList.stream().map(tweet -> modelMapper.map(tweet, TweetDto.class)).collect(Collectors.toList());
+        List<Message> messageList = tweetService.getTweetsInRadius(location);
+        List<TweetDto> tweetDtoList = messageList.stream()
+                .map(tweet -> modelMapper.map(tweet, TweetDto.class))
+                .collect(Collectors.toList());
         return ResponseEntity.ok(tweetDtoList);
     }
 }
