@@ -2,17 +2,17 @@ version: '3'
 services:
   db:
     image: postgres:11.4-alpine
-      container_name: postgres
-      ports:
-        - 5432:5432
-      volumes:
-        - /home/data/pg_data_gephrase:/var/lib/postgresql/data/pgdata
-      environment:
-        POSTGRES_PASSWORD: geophrase
-        POSTGRES_DB: geophrase
-        POSTGRES_USER: geophrase
-        PGDATA: /var/lib/postgresql/data/pgdata
-      restart: always
+    container_name: db
+    ports:
+      - 5432:5432
+    volumes:
+      - /home/data/pg_data_gephrase:/var/lib/postgresql/data/pgdata
+    environment:
+      POSTGRES_PASSWORD: geophrase
+      POSTGRES_DB: geophrase
+      POSTGRES_USER: geophrase
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
   app:
     build: .
     ports:
@@ -21,7 +21,7 @@ services:
     depends_on:
       - db
       environment:
-        - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-        - SPRING_DATASOURCE_USERNAME=compose-postgres
-        - SPRING_DATASOURCE_PASSWORD=compose-postgres
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/geophrase
+        - SPRING_DATASOURCE_USERNAME=geophrase
+        - SPRING_DATASOURCE_PASSWORD=geophrase
         - SPRING_JPA_HIBERNATE_DDL_AUTO=update
