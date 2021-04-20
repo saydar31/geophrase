@@ -17,7 +17,7 @@ services:
     build: .
     ports:
     - 8080:8080
-    container_name: gephrase
+    container_name: geophrase
     depends_on:
       - db
     environment:
