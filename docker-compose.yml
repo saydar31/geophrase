@@ -6,7 +6,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - /home/data/pg_data_gephrase:/var/lib/postgresql/data/pgdata
+      - ~/pg_data_gephrase:/var/lib/postgresql/data/pgdata
     environment:
       POSTGRES_PASSWORD: geophrase
       POSTGRES_DB: geophrase
