@@ -24,4 +24,3 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/geophrase
       - SPRING_DATASOURCE_USERNAME=geophrase
       - SPRING_DATASOURCE_PASSWORD=geophrase
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update

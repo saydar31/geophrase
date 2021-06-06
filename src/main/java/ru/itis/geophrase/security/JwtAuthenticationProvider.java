@@ -7,6 +7,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
+import ru.itis.geophrase.exception.TweetNotFoundException;
 import ru.itis.geophrase.model.User;
 import ru.itis.geophrase.service.JwtService;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 
 @Component
 @Slf4j
-public class JwtAuthenticationProvider implements AuthenticationProvider {
+public class JwtAuthenticationProvider extends TweetNotFoundException implements AuthenticationProvider {
     @Autowired
     private JwtService jwtService;
 
